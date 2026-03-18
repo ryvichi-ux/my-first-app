@@ -4,106 +4,245 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>メールワークフロー フローチャート</title>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', 'Meiryo', sans-serif;
       background: #f0f4f8;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
-      margin: 0;
+      padding: 40px 20px 60px;
     }
     h1 {
       color: #2d3748;
-      margin-bottom: 8px;
-      font-size: 1.8rem;
+      font-size: 1.7rem;
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
     }
-    p.subtitle {
+    .subtitle {
       color: #718096;
-      margin-bottom: 32px;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      margin-bottom: 36px;
     }
-    .mermaid {
+    svg {
       background: #fff;
-      border-radius: 12px;
-      padding: 40px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      max-width: 700px;
-      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.09);
+      max-width: 100%;
+      height: auto;
     }
+    /* Node text */
+    text {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', 'Meiryo', sans-serif;
+      font-size: 13px;
+      fill: #2d3748;
+    }
+    .label-sm { font-size: 11px; fill: #4a5568; }
   </style>
 </head>
 <body>
   <h1>📧 メールワークフロー</h1>
   <p class="subtitle">メールの受信・読む・返信までの一連の流れ</p>
 
-  <div class="mermaid">
-flowchart TD
-    A([🟢 スタート]) --> B[メールサーバーに接続]
-    B --> C{新しいメールが\nありますか？}
+  <svg viewBox="0 0 620 1560" width="620" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Arrow marker -->
+      <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="#4a5568"/>
+      </marker>
+      <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="#e53e3e"/>
+      </marker>
+      <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="#3182ce"/>
+      </marker>
+    </defs>
 
-    C -- いいえ --> D[待機 / 再チェック]
-    D --> C
+    <!-- ===== NODES ===== -->
 
-    C -- はい --> E[メールを受信する]
-    E --> F[メールを開く・読む]
+    <!-- 1. スタート (circle) -->
+    <ellipse cx="310" cy="50" rx="60" ry="26" fill="#48bb78" stroke="#2f855a" stroke-width="2"/>
+    <text x="310" y="55" text-anchor="middle" fill="white" font-weight="bold" font-size="14">スタート</text>
 
-    F --> G{送信元は\n信頼できますか？}
-    G -- いいえ / 迷惑メール --> H[迷惑メールとして\nマーク・削除]
-    H --> I{他に未読メールは\nありますか？}
+    <!-- 2. メールサーバーに接続 -->
+    <rect x="185" y="100" width="250" height="46" rx="8" fill="#ebf8ff" stroke="#63b3ed" stroke-width="1.5"/>
+    <text x="310" y="129" text-anchor="middle">メールサーバーに接続</text>
 
-    G -- はい --> J{返信が\n必要ですか？}
+    <!-- 3. 新しいメールがありますか？ (diamond) -->
+    <polygon points="310,175 430,225 310,275 190,225" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.5"/>
+    <text x="310" y="220" text-anchor="middle">新しいメールが</text>
+    <text x="310" y="238" text-anchor="middle">ありますか？</text>
 
-    J -- いいえ --> K[既読にする /\nアーカイブ]
-    K --> I
+    <!-- 4. 待機/再チェック (right side) -->
+    <rect x="460" y="202" width="130" height="46" rx="8" fill="#f7fafc" stroke="#cbd5e0" stroke-width="1.5"/>
+    <text x="525" y="224" text-anchor="middle" font-size="12">待機 /</text>
+    <text x="525" y="240" text-anchor="middle" font-size="12">再チェック</text>
 
-    J -- はい --> L[返信内容を\n作成する]
-    L --> M{添付ファイルは\n必要ですか？}
+    <!-- 5. メールを受信する -->
+    <rect x="185" y="300" width="250" height="46" rx="8" fill="#ebf8ff" stroke="#63b3ed" stroke-width="1.5"/>
+    <text x="310" y="329" text-anchor="middle">メールを受信する</text>
 
-    M -- はい --> N[ファイルを添付する]
-    N --> O[返信メールを確認する]
+    <!-- 6. メールを開く・読む -->
+    <rect x="185" y="370" width="250" height="46" rx="8" fill="#ebf8ff" stroke="#63b3ed" stroke-width="1.5"/>
+    <text x="310" y="399" text-anchor="middle">メールを開く・読む</text>
 
-    M -- いいえ --> O
+    <!-- 7. 送信元は信頼できますか？ (diamond) -->
+    <polygon points="310,445 430,495 310,545 190,495" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.5"/>
+    <text x="310" y="490" text-anchor="middle">送信元は</text>
+    <text x="310" y="508" text-anchor="middle">信頼できますか？</text>
 
-    O --> P{内容に\n問題ありませんか？}
+    <!-- 8. 迷惑メール → マーク・削除 (right side) -->
+    <rect x="460" y="472" width="130" height="46" rx="8" fill="#fed7d7" stroke="#fc8181" stroke-width="1.5"/>
+    <text x="525" y="491" text-anchor="middle" font-size="11">迷惑メールとして</text>
+    <text x="525" y="507" text-anchor="middle" font-size="11">マーク・削除</text>
 
-    P -- いいえ / 修正が必要 --> L
-    P -- はい --> Q[送信する ✉️]
+    <!-- 9. 返信が必要ですか？ (diamond) -->
+    <polygon points="310,570 430,620 310,670 190,620" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.5"/>
+    <text x="310" y="615" text-anchor="middle">返信が</text>
+    <text x="310" y="633" text-anchor="middle">必要ですか？</text>
 
-    Q --> R[送信済みフォルダに\n保存される]
-    R --> I
+    <!-- 10. 既読・アーカイブ (right side) -->
+    <rect x="460" y="597" width="130" height="46" rx="8" fill="#f7fafc" stroke="#cbd5e0" stroke-width="1.5"/>
+    <text x="525" y="616" text-anchor="middle" font-size="11">既読にする /</text>
+    <text x="525" y="632" text-anchor="middle" font-size="11">アーカイブ</text>
 
-    I -- はい --> F
-    I -- いいえ --> S([🔴 終了])
+    <!-- 11. 返信内容を作成する -->
+    <rect x="185" y="695" width="250" height="46" rx="8" fill="#fefcbf" stroke="#d69e2e" stroke-width="1.5"/>
+    <text x="310" y="724" text-anchor="middle">返信内容を作成する</text>
 
-    style A fill:#48bb78,color:#fff,stroke:none
-    style S fill:#fc8181,color:#fff,stroke:none
-    style H fill:#fed7d7,stroke:#fc8181
-    style Q fill:#bee3f8,stroke:#63b3ed
-    style L fill:#fefcbf,stroke:#ecc94b
-    style N fill:#fefcbf,stroke:#ecc94b
-  </div>
+    <!-- 12. 添付ファイルは必要ですか？ (diamond) -->
+    <polygon points="310,770 430,820 310,870 190,820" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.5"/>
+    <text x="310" y="815" text-anchor="middle">添付ファイルは</text>
+    <text x="310" y="833" text-anchor="middle">必要ですか？</text>
 
-  <script>
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: 'base',
-      themeVariables: {
-        primaryColor: '#ebf8ff',
-        primaryTextColor: '#2d3748',
-        primaryBorderColor: '#63b3ed',
-        lineColor: '#4a5568',
-        secondaryColor: '#f7fafc',
-        tertiaryColor: '#fff',
-        fontSize: '15px'
-      },
-      flowchart: {
-        curve: 'basis',
-        padding: 20
-      }
-    });
-  </script>
+    <!-- 13. ファイルを添付する (left side) -->
+    <rect x="50" y="797" width="120" height="46" rx="8" fill="#fefcbf" stroke="#d69e2e" stroke-width="1.5"/>
+    <text x="110" y="816" text-anchor="middle" font-size="12">ファイルを</text>
+    <text x="110" y="832" text-anchor="middle" font-size="12">添付する</text>
+
+    <!-- 14. 返信メールを確認する -->
+    <rect x="185" y="895" width="250" height="46" rx="8" fill="#ebf8ff" stroke="#63b3ed" stroke-width="1.5"/>
+    <text x="310" y="924" text-anchor="middle">返信メールを確認する</text>
+
+    <!-- 15. 内容に問題ありませんか？ (diamond) -->
+    <polygon points="310,970 430,1020 310,1070 190,1020" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.5"/>
+    <text x="310" y="1015" text-anchor="middle">内容に問題</text>
+    <text x="310" y="1033" text-anchor="middle">ありませんか？</text>
+
+    <!-- 16. 送信する -->
+    <rect x="185" y="1095" width="250" height="46" rx="8" fill="#bee3f8" stroke="#3182ce" stroke-width="2"/>
+    <text x="310" y="1124" text-anchor="middle" font-weight="bold">送信する ✉</text>
+
+    <!-- 17. 送信済みフォルダに保存 -->
+    <rect x="185" y="1165" width="250" height="46" rx="8" fill="#f7fafc" stroke="#cbd5e0" stroke-width="1.5"/>
+    <text x="310" y="1194" text-anchor="middle">送信済みフォルダに保存</text>
+
+    <!-- 18. 他に未読メールはありますか？ (diamond) -->
+    <polygon points="310,1240 430,1290 310,1340 190,1290" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.5"/>
+    <text x="310" y="1285" text-anchor="middle">他に未読メールは</text>
+    <text x="310" y="1303" text-anchor="middle">ありますか？</text>
+
+    <!-- 19. 終了 (circle) -->
+    <ellipse cx="310" cy="1390" rx="60" ry="26" fill="#fc8181" stroke="#c53030" stroke-width="2"/>
+    <text x="310" y="1395" text-anchor="middle" fill="white" font-weight="bold" font-size="14">終了</text>
+
+    <!-- ===== ARROWS ===== -->
+
+    <!-- 1→2 スタート→接続 -->
+    <line x1="310" y1="76" x2="310" y2="98" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+    <!-- 2→3 接続→チェック -->
+    <line x1="310" y1="146" x2="310" y2="173" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+    <!-- 3→4 いいえ（右）待機 -->
+    <line x1="430" y1="225" x2="458" y2="225" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <text x="438" y="218" class="label-sm">いいえ</text>
+
+    <!-- 4→3 待機→再チェック（戻り矢印） -->
+    <path d="M525,248 L525,262 L470,262 L470,230" stroke="#4a5568" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+
+    <!-- 3→5 はい（下）受信 -->
+    <line x1="310" y1="275" x2="310" y2="298" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <text x="316" y="292" class="label-sm">はい</text>
+
+    <!-- 5→6 受信→開く -->
+    <line x1="310" y1="346" x2="310" y2="368" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+    <!-- 6→7 読む→信頼 -->
+    <line x1="310" y1="416" x2="310" y2="443" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+    <!-- 7→8 いいえ（右）迷惑メール -->
+    <line x1="430" y1="495" x2="458" y2="495" stroke="#e53e3e" stroke-width="1.8" marker-end="url(#arrow-red)"/>
+    <text x="432" y="488" class="label-sm" fill="#e53e3e">いいえ</text>
+
+    <!-- 8→18 迷惑→未読チェック（右側を通る） -->
+    <path d="M590,495 L590,1290 L432,1290" stroke="#e53e3e" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-red)"/>
+
+    <!-- 7→9 はい（下）返信判定 -->
+    <line x1="310" y1="545" x2="310" y2="568" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <text x="316" y="562" class="label-sm">はい</text>
+
+    <!-- 9→10 いいえ（右）既読 -->
+    <line x1="430" y1="620" x2="458" y2="620" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <text x="432" y="613" class="label-sm">いいえ</text>
+
+    <!-- 10→18 既読→未読チェック（右側） -->
+    <path d="M590,620 L590,1290 L432,1290" stroke="#4a5568" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+
+    <!-- 9→11 はい（下）作成 -->
+    <line x1="310" y1="670" x2="310" y2="693" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <text x="316" y="687" class="label-sm">はい</text>
+
+    <!-- 11→12 作成→添付判定 -->
+    <line x1="310" y1="741" x2="310" y2="768" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+    <!-- 12→13 はい（左）添付 -->
+    <line x1="190" y1="820" x2="172" y2="820" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <text x="174" y="813" class="label-sm" text-anchor="end">はい</text>
+
+    <!-- 13→14 添付→確認（下→右） -->
+    <path d="M110,843 L110,918 L183,918" stroke="#4a5568" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+    <!-- 12→14 いいえ（下）確認 -->
+    <line x1="310" y1="870" x2="310" y2="893" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <text x="316" y="887" class="label-sm">いいえ</text>
+
+    <!-- 14→15 確認→問題？ -->
+    <line x1="310" y1="941" x2="310" y2="968" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+    <!-- 15→11 いいえ（修正）戻り -->
+    <path d="M190,1020 L155,1020 L155,718 L183,718" stroke="#e07800" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+    <text x="140" y="870" class="label-sm" fill="#e07800" transform="rotate(-90,140,870)">修正が必要</text>
+
+    <!-- 15→16 はい（下）送信 -->
+    <line x1="310" y1="1070" x2="310" y2="1093" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <text x="316" y="1087" class="label-sm">はい</text>
+
+    <!-- 16→17 送信→保存 -->
+    <line x1="310" y1="1141" x2="310" y2="1163" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+    <!-- 17→18 保存→未読チェック -->
+    <line x1="310" y1="1211" x2="310" y2="1238" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+    <!-- 18→6 はい（左）戻り -->
+    <path d="M190,1290 L40,1290 L40,393 L183,393" stroke="#3182ce" stroke-width="1.5" fill="none" stroke-dasharray="6,3" marker-end="url(#arrow-blue)"/>
+    <text x="28" y="850" class="label-sm" fill="#3182ce" transform="rotate(-90,28,850)">はい（次のメールへ）</text>
+
+    <!-- 18→19 いいえ（下）終了 -->
+    <line x1="310" y1="1340" x2="310" y2="1362" stroke="#4a5568" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <text x="316" y="1356" class="label-sm">いいえ</text>
+
+    <!-- ===== LEGEND ===== -->
+    <rect x="390" y="1430" width="195" height="115" rx="8" fill="#f7fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="487" y="1450" text-anchor="middle" font-weight="bold" font-size="12" fill="#4a5568">凡例</text>
+    <rect x="405" y="1460" width="28" height="16" rx="3" fill="#ebf8ff" stroke="#63b3ed" stroke-width="1.2"/>
+    <text x="440" y="1473" font-size="11" fill="#4a5568">処理ステップ</text>
+    <polygon points="420,1490 445,1500 420,1510 395,1500" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.2"/>
+    <text x="452" y="1503" font-size="11" fill="#4a5568">判断・分岐</text>
+    <line x1="400" y1="1530" x2="428" y2="1530" stroke="#4a5568" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow)"/>
+    <text x="440" y="1534" font-size="11" fill="#4a5568">戻り経路</text>
+
+  </svg>
 </body>
 </html>
