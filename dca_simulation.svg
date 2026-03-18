@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 820" width="960" height="820"
+     font-family="'Helvetica Neue', 'Hiragino Sans', Arial, sans-serif">
+
+  <defs>
+    <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1a237e"/>
+      <stop offset="100%" stop-color="#283593"/>
+    </linearGradient>
+    <linearGradient id="dcaBarGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e53935"/>
+      <stop offset="100%" stop-color="#ef9a9a"/>
+    </linearGradient>
+    <linearGradient id="lsBarGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1565c0"/>
+      <stop offset="100%" stop-color="#90caf9"/>
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#eceff1"/>
+      <stop offset="100%" stop-color="#f5f5f5"/>
+    </linearGradient>
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 Z" fill="#e53935"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 Z" fill="#1565c0"/>
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="120%">
+      <feDropShadow dx="2" dy="3" stdDeviation="4" flood-color="#00000022"/>
+    </filter>
+  </defs>
+
+  <!-- ===== Background ===== -->
+  <rect width="960" height="820" fill="url(#bgGrad)" rx="14"/>
+  <rect x="10" y="10" width="940" height="800" fill="white" rx="12" filter="url(#shadow)"/>
+
+  <!-- ===== Header ===== -->
+  <rect x="10" y="10" width="940" height="68" fill="url(#headerGrad)" rx="12"/>
+  <rect x="10" y="60" width="940" height="18" fill="url(#headerGrad)"/>
+  <text x="480" y="46" text-anchor="middle" font-size="21" font-weight="bold" fill="white">
+    ドルコスト平均法 vs 一括投資　シミュレーション（株価 -30% → 回復）
+  </text>
+  <text x="480" y="67" text-anchor="middle" font-size="13" fill="#bbdefb">
+    毎月 10,000円 × 12ヶ月 = 総投資額 120,000円　|　一括投資 = 初月に 120,000円
+  </text>
+
+  <!-- ===== SECTION 1: STOCK PRICE CHART ===== -->
+  <!-- Panel background -->
+  <rect x="22" y="88" width="450" height="220" fill="#fafafa" rx="10" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="247" y="108" text-anchor="middle" font-size="14" font-weight="bold" fill="#37474f">株価の推移</text>
+
+  <!-- Price chart grid -->
+  <!-- Y axis: price 60–110, height 160px, bottom at 265 -->
+  <!-- y = 265 - (price - 60) * 3.2 -->
+  <!-- Grid line 110 -->
+  <line x1="72" y1="113" x2="452" y2="113" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="67" y="117" text-anchor="end" font-size="10" fill="#78909c">110</text>
+  <!-- Grid line 100 -->
+  <line x1="72" y1="145" x2="452" y2="145" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="67" y="149" text-anchor="end" font-size="10" fill="#78909c">100</text>
+  <!-- Grid line 90 -->
+  <line x1="72" y1="177" x2="452" y2="177" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="67" y="181" text-anchor="end" font-size="10" fill="#78909c">90</text>
+  <!-- Grid line 80 -->
+  <line x1="72" y1="209" x2="452" y2="209" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="67" y="213" text-anchor="end" font-size="10" fill="#78909c">80</text>
+  <!-- Grid line 70 -->
+  <line x1="72" y1="241" x2="452" y2="241" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="67" y="245" text-anchor="end" font-size="10" fill="#78909c">70</text>
+
+  <!-- -30% zone fill -->
+  <!-- months 2-11 (x from 107 to 417), price zone from 70 to 100 -->
+  <rect x="107" y="145" width="310" height="96" fill="#fff3e0" opacity="0.7"/>
+  <text x="262" y="198" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">▼ 30% 下落ゾーン</text>
+
+  <!-- Vertical axis -->
+  <line x1="72" y1="113" x2="72" y2="265" stroke="#90a4ae" stroke-width="1.5"/>
+  <!-- Horizontal axis -->
+  <line x1="72" y1="265" x2="452" y2="265" stroke="#90a4ae" stroke-width="1.5"/>
+
+  <!-- Price data: [100,90,80,70,70,75,80,85,90,95,98,100] -->
+  <!-- x[i] = 72 + i*34.5, y = 265 - (price-60)*3.2 -->
+  <!-- x: 72,106.5,141,175.5,210,244.5,279,313.5,348,382.5,417,451.5 -->
+  <!-- y: 100→137, 90→169, 80→201, 70→233, 75→217, 85→185, 90→169, 95→153, 98→143 -->
+
+  <!-- Shaded area under price line -->
+  <polygon
+    points="72,265 72,137 107,169 141,201 176,233 210,233 245,217 279,201 314,185 348,169 383,153 417,143 452,137 452,265"
+    fill="#a5d6a7" opacity="0.25"/>
+
+  <!-- Price line -->
+  <polyline
+    points="72,137 107,169 141,201 176,233 210,233 245,217 279,201 314,185 348,169 383,153 417,143 452,137"
+    fill="none" stroke="#2e7d32" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- Price dots -->
+  <circle cx="72"  cy="137" r="4" fill="#2e7d32"/>
+  <circle cx="107" cy="169" r="4" fill="#2e7d32"/>
+  <circle cx="141" cy="201" r="4" fill="#2e7d32"/>
+  <circle cx="176" cy="233" r="5" fill="#e53935"/><!-- 最安値 -->
+  <circle cx="210" cy="233" r="5" fill="#e53935"/>
+  <circle cx="245" cy="217" r="4" fill="#2e7d32"/>
+  <circle cx="279" cy="201" r="4" fill="#2e7d32"/>
+  <circle cx="314" cy="185" r="4" fill="#2e7d32"/>
+  <circle cx="348" cy="169" r="4" fill="#2e7d32"/>
+  <circle cx="383" cy="153" r="4" fill="#2e7d32"/>
+  <circle cx="417" cy="143" r="4" fill="#2e7d32"/>
+  <circle cx="452" cy="137" r="5" fill="#1565c0"/><!-- 回復 -->
+
+  <!-- -30% annotation -->
+  <line x1="176" y1="137" x2="176" y2="233" stroke="#e53935" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="185" y="152" font-size="11" fill="#e53935" font-weight="bold">▼30%</text>
+  <text x="185" y="165" font-size="10" fill="#e53935">100→70</text>
+
+  <!-- Recovery annotation -->
+  <text x="430" y="132" font-size="11" fill="#1565c0" font-weight="bold">回復</text>
+  <text x="430" y="144" font-size="10" fill="#1565c0">→100</text>
+
+  <!-- X axis labels -->
+  <text x="72"  y="277" text-anchor="middle" font-size="9" fill="#546e7a">1月</text>
+  <text x="107" y="277" text-anchor="middle" font-size="9" fill="#546e7a">2月</text>
+  <text x="141" y="277" text-anchor="middle" font-size="9" fill="#546e7a">3月</text>
+  <text x="176" y="277" text-anchor="middle" font-size="9" fill="#546e7a">4月</text>
+  <text x="210" y="277" text-anchor="middle" font-size="9" fill="#546e7a">5月</text>
+  <text x="245" y="277" text-anchor="middle" font-size="9" fill="#546e7a">6月</text>
+  <text x="279" y="277" text-anchor="middle" font-size="9" fill="#546e7a">7月</text>
+  <text x="314" y="277" text-anchor="middle" font-size="9" fill="#546e7a">8月</text>
+  <text x="348" y="277" text-anchor="middle" font-size="9" fill="#546e7a">9月</text>
+  <text x="383" y="277" text-anchor="middle" font-size="9" fill="#546e7a">10月</text>
+  <text x="417" y="277" text-anchor="middle" font-size="9" fill="#546e7a">11月</text>
+  <text x="452" y="277" text-anchor="middle" font-size="9" fill="#546e7a">12月</text>
+  <text x="262" y="292" text-anchor="middle" font-size="11" fill="#546e7a">（月）</text>
+  <!-- Y axis label -->
+  <text x="30" y="195" text-anchor="middle" font-size="11" fill="#546e7a" transform="rotate(-90,30,195)">株価（円）</text>
+
+  <!-- ===== SECTION 2: SHARES ACQUIRED PER MONTH ===== -->
+  <!-- Panel background -->
+  <rect x="488" y="88" width="450" height="220" fill="#fafafa" rx="10" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="713" y="108" text-anchor="middle" font-size="14" font-weight="bold" fill="#37474f">毎月の購入口数（DCA）</text>
+
+  <!-- Bar chart for shares per month -->
+  <!-- Shares: [100, 111.1, 125, 142.9, 142.9, 133.3, 125, 117.6, 111.1, 105.3, 102, 100] -->
+  <!-- Max ~143, chart height 130px (from y=130 to y=265), x from 505 to 920 -->
+  <!-- bar width ~24, spacing ~7 -->
+  <!-- y = 265 - (shares/143)*130 -->
+  <!-- x axis -->
+  <line x1="505" y1="265" x2="920" y2="265" stroke="#90a4ae" stroke-width="1.5"/>
+  <line x1="505" y1="130" x2="505" y2="265" stroke="#90a4ae" stroke-width="1.5"/>
+
+  <!-- Grid -->
+  <line x1="505" y1="130" x2="920" y2="130" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="500" y="134" text-anchor="end" font-size="9" fill="#78909c">143</text>
+  <line x1="505" y1="175" x2="920" y2="175" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="500" y="179" text-anchor="end" font-size="9" fill="#78909c">111</text>
+  <line x1="505" y1="220" x2="920" y2="220" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="500" y="224" text-anchor="end" font-size="9" fill="#78909c">78</text>
+
+  <!-- Bars: x_start = 508 + i*34.5, width=24 -->
+  <!-- height = (shares/143)*135 -->
+  <!-- Month 1: 100/143*135=94.4 -->
+  <rect x="508" y="171" width="24" height="94" fill="#ef9a9a" rx="3"/>
+  <text x="520" y="168" text-anchor="middle" font-size="8" fill="#c62828">100</text>
+  <!-- Month 2: 111/143*135=104.8 -->
+  <rect x="542" y="160" width="24" height="105" fill="#ef9a9a" rx="3"/>
+  <text x="554" y="157" text-anchor="middle" font-size="8" fill="#c62828">111</text>
+  <!-- Month 3: 125/143*135=118.1 -->
+  <rect x="577" y="147" width="24" height="118" fill="#ef5350" rx="3"/>
+  <text x="589" y="144" text-anchor="middle" font-size="8" fill="#c62828">125</text>
+  <!-- Month 4: 142.9/143*135=134.9 → highlight -->
+  <rect x="611" y="130" width="24" height="135" fill="#e53935" rx="3"/>
+  <text x="623" y="127" text-anchor="middle" font-size="8" fill="#b71c1c" font-weight="bold">143</text>
+  <!-- Month 5: 142.9 -->
+  <rect x="646" y="130" width="24" height="135" fill="#e53935" rx="3"/>
+  <text x="658" y="127" text-anchor="middle" font-size="8" fill="#b71c1c" font-weight="bold">143</text>
+  <!-- Month 6: 133.3/143*135=125.9 -->
+  <rect x="680" y="139" width="24" height="126" fill="#ef5350" rx="3"/>
+  <text x="692" y="136" text-anchor="middle" font-size="8" fill="#c62828">133</text>
+  <!-- Month 7: 125 -->
+  <rect x="714" y="147" width="24" height="118" fill="#ef5350" rx="3"/>
+  <text x="726" y="144" text-anchor="middle" font-size="8" fill="#c62828">125</text>
+  <!-- Month 8: 117.6/143*135=111.1 -->
+  <rect x="749" y="154" width="24" height="111" fill="#ef9a9a" rx="3"/>
+  <text x="761" y="151" text-anchor="middle" font-size="8" fill="#c62828">118</text>
+  <!-- Month 9: 111.1/143*135=104.8 -->
+  <rect x="783" y="160" width="24" height="105" fill="#ef9a9a" rx="3"/>
+  <text x="795" y="157" text-anchor="middle" font-size="8" fill="#c62828">111</text>
+  <!-- Month 10: 105.3/143*135=99.4 -->
+  <rect x="817" y="166" width="24" height="99" fill="#ef9a9a" rx="3"/>
+  <text x="829" y="163" text-anchor="middle" font-size="8" fill="#c62828">105</text>
+  <!-- Month 11: 102/143*135=96.4 -->
+  <rect x="852" y="169" width="24" height="96" fill="#ef9a9a" rx="3"/>
+  <text x="864" y="166" text-anchor="middle" font-size="8" fill="#c62828">102</text>
+  <!-- Month 12: 100/143*135=94.4 -->
+  <rect x="886" y="171" width="24" height="94" fill="#ef9a9a" rx="3"/>
+  <text x="898" y="168" text-anchor="middle" font-size="8" fill="#c62828">100</text>
+
+  <!-- X axis labels -->
+  <text x="520"  y="277" text-anchor="middle" font-size="9" fill="#546e7a">1月</text>
+  <text x="554"  y="277" text-anchor="middle" font-size="9" fill="#546e7a">2月</text>
+  <text x="589"  y="277" text-anchor="middle" font-size="9" fill="#546e7a">3月</text>
+  <text x="623"  y="277" text-anchor="middle" font-size="9" fill="#e53935" font-weight="bold">4月</text>
+  <text x="658"  y="277" text-anchor="middle" font-size="9" fill="#e53935" font-weight="bold">5月</text>
+  <text x="692"  y="277" text-anchor="middle" font-size="9" fill="#546e7a">6月</text>
+  <text x="726"  y="277" text-anchor="middle" font-size="9" fill="#546e7a">7月</text>
+  <text x="761"  y="277" text-anchor="middle" font-size="9" fill="#546e7a">8月</text>
+  <text x="795"  y="277" text-anchor="middle" font-size="9" fill="#546e7a">9月</text>
+  <text x="829"  y="277" text-anchor="middle" font-size="9" fill="#546e7a">10月</text>
+  <text x="864"  y="277" text-anchor="middle" font-size="9" fill="#546e7a">11月</text>
+  <text x="898"  y="277" text-anchor="middle" font-size="9" fill="#546e7a">12月</text>
+  <text x="713"  y="292" text-anchor="middle" font-size="11" fill="#546e7a">（月）</text>
+  <text x="485" y="220" text-anchor="middle" font-size="11" fill="#546e7a" transform="rotate(-90,485,220)">購入口数</text>
+
+  <!-- annotation on cheap months -->
+  <rect x="605" y="114" width="82" height="14" fill="#fff8e1" rx="3" stroke="#ffc107" stroke-width="1"/>
+  <text x="646" y="124" text-anchor="middle" font-size="9" fill="#e65100" font-weight="bold">安値でたくさん買える!</text>
+
+  <!-- ===== SECTION 3: PORTFOLIO VALUE OVER TIME ===== -->
+  <rect x="22" y="308" width="916" height="220" fill="#fafafa" rx="10" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="480" y="328" text-anchor="middle" font-size="14" font-weight="bold" fill="#37474f">評価額の推移比較</text>
+
+  <!-- Chart area: x 65-935, y 340-510, height 170 -->
+  <!-- Y scale: 0-150000, height 170 → 170/150000 per yen -->
+  <!-- y = 510 - v * 170/150000 -->
+
+  <!-- Grid lines -->
+  <line x1="65" y1="510" x2="935" y2="510" stroke="#90a4ae" stroke-width="1.5"/><!-- 0 -->
+  <line x1="65" y1="510" x2="65" y2="340" stroke="#90a4ae" stroke-width="1.5"/>
+  <line x1="65" y1="453" x2="935" y2="453" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="60" y="457" text-anchor="end" font-size="10" fill="#78909c">5万</text>
+  <line x1="65" y1="396" x2="935" y2="396" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="60" y="400" text-anchor="end" font-size="10" fill="#78909c">10万</text>
+  <line x1="65" y1="339" x2="935" y2="339" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="60" y="343" text-anchor="end" font-size="10" fill="#78909c">15万</text>
+  <text x="30" y="435" text-anchor="middle" font-size="11" fill="#546e7a" transform="rotate(-90,30,435)">評価額（円）</text>
+
+  <!-- X positions: x[i] = 65 + i*78, for i=0..11 -->
+  <!-- x: 65,143,221,299,377,455,533,611,689,767,845,923 -->
+
+  <!-- === Lump Sum value line === -->
+  <!-- values: 120000,108000,96000,84000,84000,90000,96000,102000,108000,114000,117600,120000 -->
+  <!-- y = 510 - v*170/150000 -->
+  <!-- 120000→374, 108000→387.6, 96000→401.2, 84000→414.8, 90000→408, 96000→401.2, 102000→394.4, 108000→387.6, 114000→380.8, 117600→377.0, 120000→374 -->
+  <polyline
+    points="65,374 143,388 221,401 299,415 377,415 455,408 533,401 611,394 689,388 767,381 845,377 923,374"
+    fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="7,4"/>
+
+  <!-- === DCA value line === -->
+  <!-- values: 10000,19000,26889,33528,43528,56637,70413,84814,99803,115347,128990,141622 -->
+  <!-- y = 510 - v*170/150000 -->
+  <!-- 10000→499, 19000→489, 26889→480, 33528→472, 43528→461, 56637→446, 70413→430, 84814→414, 99803→397, 115347→380, 128990→364, 141622→349 -->
+  <polyline
+    points="65,499 143,489 221,480 299,472 377,461 455,446 533,430 611,414 689,397 767,380 845,364 923,349"
+    fill="none" stroke="#e53935" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- === Invested amount (cost basis) === -->
+  <!-- 10000,20000,30000,...,120000 → y: 499,487,476,465,453,442,430,419,407,396,385,374 -->
+  <polyline
+    points="65,499 143,487 221,476 299,465 377,453 455,442 533,430 611,419 689,407 767,396 845,385 923,374"
+    fill="none" stroke="#78909c" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Data points DCA -->
+  <circle cx="65"  cy="499" r="4" fill="#e53935"/>
+  <circle cx="143" cy="489" r="4" fill="#e53935"/>
+  <circle cx="221" cy="480" r="4" fill="#e53935"/>
+  <circle cx="299" cy="472" r="4" fill="#e53935"/>
+  <circle cx="377" cy="461" r="4" fill="#e53935"/>
+  <circle cx="455" cy="446" r="4" fill="#e53935"/>
+  <circle cx="533" cy="430" r="4" fill="#e53935"/>
+  <circle cx="611" cy="414" r="4" fill="#e53935"/>
+  <circle cx="689" cy="397" r="4" fill="#e53935"/>
+  <circle cx="767" cy="380" r="4" fill="#e53935"/>
+  <circle cx="845" cy="364" r="4" fill="#e53935"/>
+  <circle cx="923" cy="349" r="6" fill="#e53935" stroke="white" stroke-width="2"/>
+
+  <!-- Data points Lump Sum -->
+  <circle cx="65"  cy="374" r="4" fill="#1565c0"/>
+  <circle cx="143" cy="388" r="4" fill="#1565c0"/>
+  <circle cx="221" cy="401" r="4" fill="#1565c0"/>
+  <circle cx="299" cy="415" r="5" fill="#e53935" stroke="#1565c0" stroke-width="2"/>
+  <circle cx="377" cy="415" r="5" fill="#e53935" stroke="#1565c0" stroke-width="2"/>
+  <circle cx="455" cy="408" r="4" fill="#1565c0"/>
+  <circle cx="533" cy="401" r="4" fill="#1565c0"/>
+  <circle cx="611" cy="394" r="4" fill="#1565c0"/>
+  <circle cx="689" cy="388" r="4" fill="#1565c0"/>
+  <circle cx="767" cy="381" r="4" fill="#1565c0"/>
+  <circle cx="845" cy="377" r="4" fill="#1565c0"/>
+  <circle cx="923" cy="374" r="6" fill="#1565c0" stroke="white" stroke-width="2"/>
+
+  <!-- X labels -->
+  <text x="65"  y="522" text-anchor="middle" font-size="9" fill="#546e7a">1月</text>
+  <text x="143" y="522" text-anchor="middle" font-size="9" fill="#546e7a">2月</text>
+  <text x="221" y="522" text-anchor="middle" font-size="9" fill="#546e7a">3月</text>
+  <text x="299" y="522" text-anchor="middle" font-size="9" fill="#546e7a">4月</text>
+  <text x="377" y="522" text-anchor="middle" font-size="9" fill="#546e7a">5月</text>
+  <text x="455" y="522" text-anchor="middle" font-size="9" fill="#546e7a">6月</text>
+  <text x="533" y="522" text-anchor="middle" font-size="9" fill="#546e7a">7月</text>
+  <text x="611" y="522" text-anchor="middle" font-size="9" fill="#546e7a">8月</text>
+  <text x="689" y="522" text-anchor="middle" font-size="9" fill="#546e7a">9月</text>
+  <text x="767" y="522" text-anchor="middle" font-size="9" fill="#546e7a">10月</text>
+  <text x="845" y="522" text-anchor="middle" font-size="9" fill="#546e7a">11月</text>
+  <text x="923" y="522" text-anchor="middle" font-size="9" fill="#546e7a">12月</text>
+
+  <!-- Legend -->
+  <line x1="350" y1="538" x2="380" y2="538" stroke="#e53935" stroke-width="2.5"/>
+  <circle cx="365" cy="538" r="4" fill="#e53935"/>
+  <text x="386" y="542" font-size="12" fill="#c62828">DCA（ドルコスト平均法）</text>
+  <line x1="565" y1="538" x2="595" y2="538" stroke="#1565c0" stroke-width="2.5" stroke-dasharray="7,4"/>
+  <circle cx="580" cy="538" r="4" fill="#1565c0"/>
+  <text x="601" y="542" font-size="12" fill="#1565c0">一括投資</text>
+  <line x1="690" y1="538" x2="720" y2="538" stroke="#78909c" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="726" y="542" font-size="12" fill="#546e7a">投資元本（DCA）</text>
+
+  <!-- Difference annotation at month 12 -->
+  <line x1="923" y1="349" x2="923" y2="374" stroke="#ff6f00" stroke-width="2"/>
+  <rect x="726" y="342" width="188" height="40" fill="#fff8e1" rx="6" stroke="#ffc107" stroke-width="1.5"/>
+  <text x="820" y="358" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">差額 +21,622円</text>
+  <text x="820" y="373" text-anchor="middle" font-size="11" fill="#e65100">DCAが +18.0% 有利!</text>
+
+  <!-- ===== SECTION 4: FINAL COMPARISON BARS ===== -->
+  <rect x="22" y="550" width="916" height="250" fill="#fafafa" rx="10" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="480" y="572" text-anchor="middle" font-size="14" font-weight="bold" fill="#37474f">最終結果の比較（12ヶ月後・株価が元の100に回復した時）</text>
+
+  <!-- Bar chart -->
+  <!-- Max 150,000 → bar height scale area: y from 590 to 760, height=170 -->
+  <!-- DCA: 141,622 → 141622/150000 * 170 = 160.2px -->
+  <!-- Lump Sum: 120,000 → 136px -->
+
+  <!-- Axis -->
+  <line x1="200" y1="760" x2="760" y2="760" stroke="#90a4ae" stroke-width="1.5"/>
+
+  <!-- Horizontal guide lines -->
+  <line x1="200" y1="760" x2="760" y2="760" stroke="#90a4ae" stroke-width="1"/>
+  <line x1="200" y1="703" x2="760" y2="703" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="195" y="707" text-anchor="end" font-size="9" fill="#78909c">5万</text>
+  <line x1="200" y1="647" x2="760" y2="647" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="195" y="651" text-anchor="end" font-size="9" fill="#78909c">10万</text>
+  <line x1="200" y1="590" x2="760" y2="590" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="195" y="594" text-anchor="end" font-size="9" fill="#78909c">15万</text>
+
+  <!-- DCA bar: 141622 → height 160.2, top = 760-160=600 -->
+  <rect x="310" y="600" width="140" height="160" fill="url(#dcaBarGrad)" rx="6" filter="url(#shadow)"/>
+  <!-- Lump Sum bar: 120000 → height 136, top = 760-136=624 -->
+  <rect x="510" y="624" width="140" height="136" fill="url(#lsBarGrad)" rx="6" filter="url(#shadow)"/>
+
+  <!-- Cost basis line -->
+  <line x1="295" y1="624" x2="665" y2="624" stroke="#78909c" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="670" y="628" font-size="10" fill="#546e7a">元本ライン</text>
+  <text x="670" y="640" font-size="10" fill="#546e7a">120,000円</text>
+
+  <!-- DCA bar labels -->
+  <text x="380" y="596" text-anchor="middle" font-size="15" font-weight="bold" fill="#e53935">141,622円</text>
+  <text x="380" y="611" text-anchor="middle" font-size="11" fill="#e53935">（+18.0%）</text>
+  <text x="380" y="765" text-anchor="middle" font-size="12" fill="#c62828" font-weight="bold">DCA</text>
+
+  <!-- Lump Sum bar labels -->
+  <text x="580" y="620" text-anchor="middle" font-size="15" font-weight="bold" fill="#1565c0">120,000円</text>
+  <text x="580" y="635" text-anchor="middle" font-size="11" fill="#1565c0">（±0%）</text>
+  <text x="580" y="765" text-anchor="middle" font-size="12" fill="#1565c0" font-weight="bold">一括投資</text>
+
+  <!-- Shares comparison -->
+  <rect x="680" y="590" width="218" height="80" fill="#e8f5e9" rx="8" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="789" y="608" text-anchor="middle" font-size="11" fill="#1b5e20" font-weight="bold">取得口数の違い</text>
+  <text x="789" y="627" text-anchor="middle" font-size="12" fill="#e53935">DCA: 1,416 口</text>
+  <text x="789" y="645" text-anchor="middle" font-size="12" fill="#1565c0">一括: 1,200 口</text>
+  <text x="789" y="663" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">→ +216 口多く取得!</text>
+
+  <!-- Profit arrow annotation -->
+  <line x1="450" y1="600" x2="510" y2="600" stroke="#ff6f00" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+  <rect x="430" y="575" width="82" height="24" fill="#fff3e0" rx="5" stroke="#ff9800" stroke-width="1"/>
+  <text x="471" y="591" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">+21,622円</text>
+
+  <!-- ===== Summary box ===== -->
+  <rect x="22" y="696" width="238" height="78" fill="#e8f5e9" rx="10" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="141" y="714" text-anchor="middle" font-size="12" font-weight="bold" fill="#1b5e20">DCA のポイント</text>
+  <text x="33"  y="731" font-size="11" fill="#2e7d32">✔ 下落時に多く買い, 上昇時に少なく買う</text>
+  <text x="33"  y="748" font-size="11" fill="#2e7d32">✔ 平均取得単価が自然に下がる</text>
+  <text x="33"  y="765" font-size="11" fill="#2e7d32">✔ 感情に左右されず淡々と積立できる</text>
+
+  <!-- Avg cost box -->
+  <rect x="276" y="696" width="250" height="78" fill="#e3f2fd" rx="10" stroke="#64b5f6" stroke-width="1.5"/>
+  <text x="401" y="714" text-anchor="middle" font-size="12" font-weight="bold" fill="#0d47a1">平均取得単価</text>
+  <text x="291" y="734" font-size="12" fill="#1565c0" font-weight="bold">DCA: 120,000÷1,416 ≈ 84.7円</text>
+  <text x="291" y="752" font-size="12" fill="#1565c0">一括: 120,000÷1,200 = 100.0円</text>
+  <text x="291" y="770" font-size="11" fill="#0d47a1">→ 約 15.3円 / 口 安く取得!</text>
+
+  <!-- Condition note -->
+  <rect x="540" y="696" width="398" height="78" fill="#fff3e0" rx="10" stroke="#ffb74d" stroke-width="1.5"/>
+  <text x="739" y="714" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">注意事項</text>
+  <text x="553" y="731" font-size="11" fill="#bf360c">⚠ DCAが有利なのは「下落→回復」がある相場</text>
+  <text x="553" y="748" font-size="11" fill="#bf360c">⚠ 一貫して上昇する相場では一括投資が有利</text>
+  <text x="553" y="765" font-size="11" fill="#bf360c">⚠ 本シミュレーションは理解促進を目的としています</text>
+
+</svg>
