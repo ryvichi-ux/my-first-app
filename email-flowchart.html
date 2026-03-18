@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>メールワークフロー フローチャート</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      margin: 0;
+    }
+    h1 {
+      color: #2d3748;
+      margin-bottom: 8px;
+      font-size: 1.8rem;
+    }
+    p.subtitle {
+      color: #718096;
+      margin-bottom: 32px;
+      font-size: 0.95rem;
+    }
+    .mermaid {
+      background: #fff;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      max-width: 700px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>📧 メールワークフロー</h1>
+  <p class="subtitle">メールの受信・読む・返信までの一連の流れ</p>
+
+  <div class="mermaid">
+flowchart TD
+    A([🟢 スタート]) --> B[メールサーバーに接続]
+    B --> C{新しいメールが\nありますか？}
+
+    C -- いいえ --> D[待機 / 再チェック]
+    D --> C
+
+    C -- はい --> E[メールを受信する]
+    E --> F[メールを開く・読む]
+
+    F --> G{送信元は\n信頼できますか？}
+    G -- いいえ / 迷惑メール --> H[迷惑メールとして\nマーク・削除]
+    H --> I{他に未読メールは\nありますか？}
+
+    G -- はい --> J{返信が\n必要ですか？}
+
+    J -- いいえ --> K[既読にする /\nアーカイブ]
+    K --> I
+
+    J -- はい --> L[返信内容を\n作成する]
+    L --> M{添付ファイルは\n必要ですか？}
+
+    M -- はい --> N[ファイルを添付する]
+    N --> O[返信メールを確認する]
+
+    M -- いいえ --> O
+
+    O --> P{内容に\n問題ありませんか？}
+
+    P -- いいえ / 修正が必要 --> L
+    P -- はい --> Q[送信する ✉️]
+
+    Q --> R[送信済みフォルダに\n保存される]
+    R --> I
+
+    I -- はい --> F
+    I -- いいえ --> S([🔴 終了])
+
+    style A fill:#48bb78,color:#fff,stroke:none
+    style S fill:#fc8181,color:#fff,stroke:none
+    style H fill:#fed7d7,stroke:#fc8181
+    style Q fill:#bee3f8,stroke:#63b3ed
+    style L fill:#fefcbf,stroke:#ecc94b
+    style N fill:#fefcbf,stroke:#ecc94b
+  </div>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#ebf8ff',
+        primaryTextColor: '#2d3748',
+        primaryBorderColor: '#63b3ed',
+        lineColor: '#4a5568',
+        secondaryColor: '#f7fafc',
+        tertiaryColor: '#fff',
+        fontSize: '15px'
+      },
+      flowchart: {
+        curve: 'basis',
+        padding: 20
+      }
+    });
+  </script>
+</body>
+</html>
