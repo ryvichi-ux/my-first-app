@@ -311,10 +311,10 @@
   <text x="726" y="542" font-size="12" fill="#546e7a">投資元本（DCA）</text>
 
   <!-- Difference annotation at month 12 -->
-  <line x1="923" y1="349" x2="923" y2="374" stroke="#ff6f00" stroke-width="2"/>
-  <rect x="726" y="342" width="188" height="40" fill="#fff8e1" rx="6" stroke="#ffc107" stroke-width="1.5"/>
-  <text x="820" y="358" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">差額 +21,622円</text>
-  <text x="820" y="373" text-anchor="middle" font-size="11" fill="#e65100">DCAが +18.0% 有利!</text>
+  <line x1="923" y1="349" x2="923" y2="395" stroke="#ff6f00" stroke-width="2"/>
+  <rect x="726" y="395" width="188" height="40" fill="#fff8e1" rx="6" stroke="#ffc107" stroke-width="1.5"/>
+  <text x="820" y="411" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">差額 +21,622円</text>
+  <text x="820" y="426" text-anchor="middle" font-size="11" fill="#e65100">DCAが +18.0% 有利!</text>
 
   <!-- ===== SECTION 4: FINAL COMPARISON BARS ===== -->
   <rect x="22" y="550" width="916" height="250" fill="#fafafa" rx="10" stroke="#e0e0e0" stroke-width="1"/>
