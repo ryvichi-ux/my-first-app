@@ -8,6 +8,7 @@ FROM_KEYWORDS = [
     'mailer-daemon',
     'mail delivery',
     'mail delivery system',
+    'mail administrator',
     'postmaster',
     'delivery status notification',
     'delivery failure',
@@ -17,16 +18,23 @@ FROM_KEYWORDS = [
 
 SUBJECT_KEYWORDS = [
     'undeliverable',
+    'undelivered mail',
     'delivery failure',
     'delivery status notification',
     'mail delivery failed',
+    'mail delivery failure',
     'returned mail',
+    'returned to sender',
     'failure notice',
     'delivery report',
+    'mail system error',
+    'non-delivery',
+    'non delivery',
     '配信不能',
     '配信エラー',
     '送信失敗',
     'メール配信エラー',
+    '配信不達',
 ]
 
 def is_delivery_error(filepath):
@@ -34,13 +42,19 @@ def is_delivery_error(filepath):
     try:
         with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
             headers = {}
+            last_key = None
             for line in f:
-                stripped = line.strip()
-                if stripped == '':
+                if line == '\n' or line == '\r\n':
                     break  # ヘッダー終わり
+                # 折り返し行（継続行）: 先頭が空白
+                if line[0:1] in (' ', '\t') and last_key:
+                    headers[last_key] += ' ' + line.strip().lower()
+                    continue
+                stripped = line.strip()
                 if ':' in stripped:
                     key, _, val = stripped.partition(':')
-                    headers[key.strip().lower()] = val.strip().lower()
+                    last_key = key.strip().lower()
+                    headers[last_key] = val.strip().lower()
 
             # From ヘッダーチェック
             from_val = headers.get('from', '')
