@@ -13,10 +13,16 @@ def get_file_hash(filepath):
 
 mail_dir = r'C:\e\data\HidemaruMail\MailBox'
 
+# 添付ファイルフォルダ名（スキャン対象外）
+SKIP_DIRS = {'受信添付', '送信添付', '添付'}
+
 hash_map = defaultdict(list)
 
 print("スキャン中...")
 for root, dirs, files in os.walk(mail_dir):
+    # 添付フォルダはスキャンしない
+    dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+
     for fname in files:
         if fname.endswith('.txt'):
             fpath = os.path.join(root, fname)
