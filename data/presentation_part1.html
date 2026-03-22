@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>長田・永井一族 プレゼンテーション</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif; background: #1a0a00; }
+.slide {
+  width: 1280px; min-height: 720px; margin: 20px auto;
+  background: #fdf6e3; position: relative; overflow: hidden;
+  page-break-after: always; display: flex; flex-direction: column;
+}
+.slide-number {
+  position: absolute; bottom: 16px; right: 24px;
+  font-size: 14px; color: #888; font-family: sans-serif;
+}
+
+/* 共通装飾 */
+.gold-bar { width: 100%; height: 6px; background: linear-gradient(90deg, #8b6914, #d4a017, #8b6914); }
+.side-accent {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 8px;
+  background: linear-gradient(180deg, #7a1515, #c0392b, #7a1515);
+}
+
+/* スライド1: タイトル */
+.s1 { background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 60%, #1a0a00 100%); color: #fdf6e3; justify-content: center; align-items: center; text-align: center; }
+.s1 .title-main { font-size: 72px; font-weight: bold; letter-spacing: 0.1em; color: #d4a017; text-shadow: 2px 2px 8px rgba(0,0,0,0.8); margin-bottom: 16px; }
+.s1 .title-sub { font-size: 28px; color: #fdf6e3; margin-bottom: 32px; letter-spacing: 0.15em; }
+.s1 .title-detail { font-size: 18px; color: #c8a96e; letter-spacing: 0.1em; margin: 8px 0; }
+.s1 .year-badge { display: inline-block; border: 2px solid #d4a017; padding: 8px 32px; font-size: 20px; color: #d4a017; margin-top: 24px; letter-spacing: 0.2em; }
+.s1::before { content: ''; position: absolute; top: 40px; left: 40px; right: 40px; bottom: 40px; border: 1px solid rgba(212,160,23,0.3); pointer-events: none; }
+
+/* スライド2以降: 共通 */
+.slide-header { background: linear-gradient(90deg, #7a1515, #c0392b); color: #fdf6e3; padding: 18px 48px 18px 56px; font-size: 28px; font-weight: bold; letter-spacing: 0.08em; }
+.slide-body { flex: 1; padding: 32px 56px; position: relative; }
+.slide-body h3 { font-size: 22px; color: #7a1515; margin: 16px 0 10px; border-left: 4px solid #d4a017; padding-left: 12px; }
+.slide-body p, .slide-body li { font-size: 18px; line-height: 1.9; color: #2c1a00; margin: 6px 0; }
+.slide-body ul { list-style: none; padding-left: 16px; }
+.slide-body ul li::before { content: '◆ '; color: #d4a017; }
+.slide-body .note { font-size: 16px; color: #8b6914; background: #fef9ec; border-left: 3px solid #d4a017; padding: 10px 16px; margin-top: 16px; }
+.slide-body .highlight { font-size: 20px; color: #7a1515; font-weight: bold; background: #fff8e8; border: 1px solid #d4a017; padding: 14px 24px; margin: 16px 0; text-align: center; }
+
+/* テーブル */
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 17px; }
+th { background: #7a1515; color: #fdf6e3; padding: 10px 16px; text-align: left; }
+td { padding: 9px 16px; border-bottom: 1px solid #e8d8b0; color: #2c1a00; }
+tr:nth-child(even) td { background: #fef9ec; }
+
+/* 写真プレースホルダー */
+.photo-box {
+  background: #3d2000; border: 2px solid #8b6914;
+  display: flex; align-items: center; justify-content: center;
+  color: #d4a017; font-size: 15px; text-align: center; padding: 12px;
+}
+
+/* 年表 */
+.timeline { padding: 8px 0; }
+.timeline-item { display: flex; margin: 10px 0; align-items: flex-start; }
+.timeline-year { min-width: 120px; font-weight: bold; color: #7a1515; font-size: 18px; }
+.timeline-text { font-size: 17px; color: #2c1a00; line-height: 1.7; border-left: 2px solid #d4a017; padding-left: 16px; }
+
+/* 2カラム */
+.two-col { display: flex; gap: 32px; }
+.two-col > div { flex: 1; }
+</style>
+</head>
+<body>
+
+<!-- スライド1: タイトル -->
+<div class="slide s1">
+  <div class="title-main">長田・永井一族</div>
+  <div class="title-sub">― 神官武家が紡いだ三河の歴史 ―</div>
+  <div class="title-detail">碧南市大浜 × 大浜熊野大神社 × 永井直勝没後400年</div>
+  <div class="title-detail">碧南が生んだ戦国武将・大名の物語</div>
+  <div class="year-badge">永井直勝 没後四〇〇年　2025年</div>
+  <div class="slide-number">1 / 20</div>
+</div>
+
+<!-- スライド2: 目的 -->
+<div class="slide">
+  <div class="gold-bar"></div>
+  <div class="side-accent"></div>
+  <div class="slide-header">この発表の目的・見どころ</div>
+  <div class="slide-body">
+    <h3>なぜ今、長田家の歴史を語るのか？</h3>
+    <ul>
+      <li>2025年は永井直勝（長田家出身の戦国大名）<strong>没後400年</strong></li>
+      <li>碧南市公式展覧会「長田・永井一族」開催（碧南市藤井達吉現代美術館）</li>
+      <li>高槻・永井神社の修復プロジェクト（CAMPFIRE）とも深く関連</li>
+    </ul>
+    <h3>この発表で分かること</h3>
+    <ul>
+      <li>長田家とはどんな家か</li>
+      <li>大浜熊野大神社の歴史</li>
+      <li>永井直勝が生まれた背景</li>
+      <li>江戸時代まで続いた長田家の活躍</li>
+    </ul>
+    <div class="note">📚 参考：碧南市藤井達吉現代美術館 2025年企画展図録『長田・永井一族』</div>
+  </div>
+  <div class="slide-number">2 / 20</div>
+</div>
+
+<!-- スライド3: 地図 -->
+<div class="slide">
+  <div class="gold-bar"></div>
+  <div class="side-accent"></div>
+  <div class="slide-header">碧南・大浜ってどこ？ ― 地図で見る舞台 ―</div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <h3>舞台：三河大浜（現・愛知県碧南市）</h3>
+        <ul>
+          <li>三河湾に面した港町</li>
+          <li>中世から海運・物流の<strong>要所</strong></li>
+          <li>東は名古屋港、西は知多半島に囲まれた海上交通の要衝</li>
+          <li>現在の碧南市大浜地区</li>
+        </ul>
+        <div style="margin-top:24px; background:#e8f4f8; border:1px solid #aad; padding:20px; font-family:monospace; font-size:15px; line-height:2;">
+          　　　伊勢湾<br>
+          　　　　↑<br>
+          名古屋港 ← <strong>大浜（碧南市）</strong><br>
+          　　　　↓<br>
+          　　三河湾 → 遠江（静岡方面）
+        </div>
+        <div class="note">この港町が長田家と深く結びついていた</div>
+      </div>
+      <div>
+        <div class="photo-box" style="height:320px;">
+          📍 愛知県碧南市<br>大浜熊野大神社<br>（所在地：碧南市大浜上町2-1）<br><br>
+          ［地図・航空写真を挿入］
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">3 / 20</div>
+</div>
+
+<!-- スライド4: 長田家とは -->
+<div class="slide">
+  <div class="gold-bar"></div>
+  <div class="side-accent"></div>
+  <div class="slide-header">長田家とは ― 神官にして武家の家 ―</div>
+  <div class="slide-body">
+    <h3>長田家の基本プロフィール</h3>
+    <table>
+      <tr><th>項目</th><th>内容</th></tr>
+      <tr><td>発祥</td><td>知多野間の長田氏の流れをくむ</td></tr>
+      <tr><td>本拠</td><td>三河大浜（現・碧南市）</td></tr>
+      <tr><td>職業</td><td>大浜熊野大神社の世襲神職（下宮神官）</td></tr>
+      <tr><td>性格</td><td>「神官武家」― 神職と武家の両面を持つ</td></tr>
+      <tr><td>代表人物</td><td>長田白正（創建者）、長田平右衛門重元（直勝の父）</td></tr>
+    </table>
+    <div class="highlight">「ただの神社の家」ではなく、武家としての気概を持つ地域の有力者</div>
+    <div class="note">2025年碧南市公式展の講演テーマ：「戦国織豊期における大浜の神官武家長田氏の動向」</div>
+  </div>
+  <div class="slide-number">4 / 20</div>
+</div>
+
+<!-- スライド5: 熊野神社誕生 -->
+<div class="slide">
+  <div class="gold-bar"></div>
+  <div class="side-accent"></div>
+  <div class="slide-header">大浜熊野大神社の誕生 ― 1168年の勧請 ―</div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <h3>創建の物語</h3>
+        <ul>
+          <li><strong>1168年（仁安3年）</strong>：長田白正が紀州・熊野権現を勧請して創建</li>
+          <li>熊野信仰を三河に持ち込んだのが長田家の祖先</li>
+          <li>「下宮神官」を長田氏が代々世襲</li>
+        </ul>
+        <h3>熊野信仰とは？</h3>
+        <ul>
+          <li>紀伊半島（和歌山）の熊野三山を本社とする信仰</li>
+          <li>平安〜鎌倉時代に全国的に広まった</li>
+          <li>「全国に3000社以上」とも言われる</li>
+        </ul>
+        <div class="highlight">長田家は熊野の神様を三河に運び、<br>850年以上守り続けた</div>
+      </div>
+      <div>
+        <div class="photo-box" style="height:200px; margin-bottom:16px;">
+          🏛️ 大浜熊野大神社（上の宮）<br>現在の社殿<br>［写真を挿入］
+        </div>
+        <div class="photo-box" style="height:160px;">
+          🗺️ 熊野三山（和歌山県）<br>← 本社からの勧請ルート<br>［地図を挿入］
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">5 / 20</div>
+</div>
+
+<!-- スライド6: 年表① -->
+<div class="slide">
+  <div class="gold-bar"></div>
+  <div class="side-accent"></div>
+  <div class="slide-header">歴史年表① 中世編（1168〜1559年）</div>
+  <div class="slide-body">
+    <h3>長田家と熊野神社の歩み（前半）</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">1168年</div>
+        <div class="timeline-text">長田白正が大浜熊野大神社を<strong>勧請・創建</strong><br>長田氏が代々下宮神官を世襲</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1386年</div>
+        <div class="timeline-text">社殿を現在地に<strong>移転</strong></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1543年</div>
+        <div class="timeline-text"><strong>松平広忠判物</strong>（碧南市指定文化財）<br>家康の父が神社の社領を安堵</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1550年</div>
+        <div class="timeline-text"><strong>今川義元判物</strong>（碧南市指定文化財）<br>戦国の雄・今川氏も神社を保護</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1559年</div>
+        <div class="timeline-text"><strong>松平元康（後の徳川家康）判物</strong>（碧南市指定文化財）<br>大浜熊野社への寄進</div>
+      </div>
+    </div>
+    <div class="note">⚔️ 松平・今川・徳川という戦国の大勢力が次々と保護した神社！</div>
+  </div>
+  <div class="slide-number">6 / 20</div>
+</div>
+
+<!-- スライド7: 年表② -->
+<div class="slide">
+  <div class="gold-bar"></div>
+  <div class="side-accent"></div>
+  <div class="slide-header">歴史年表② 戦国〜江戸初期（1563〜1625年）</div>
+  <div class="slide-body">
+    <h3>永井直勝の登場と長田家の転機</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">1563年</div>
+        <div class="timeline-text">永井直勝、三河大浜の<strong>長田平右衛門重元の子</strong>として生まれる</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">幼少期</div>
+        <div class="timeline-text"><strong>松平信康</strong>（家康の長男）の小姓として仕える</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">成長後</div>
+        <div class="timeline-text"><strong>徳川家康</strong>の側近として活躍<br>関ヶ原の戦いでも武功を挙げる</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">江戸時代</div>
+        <div class="timeline-text"><strong>大和郡山 → 摂津高槻 → 美濃加納</strong>の三大名家を歴任</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1625年</div>
+        <div class="timeline-text">永井直勝、<strong>没</strong>（享年63歳）<br>→ 没後400年 = 2025年</div>
+      </div>
+    </div>
+    <div class="highlight">神社の神主の家から、徳川幕府を支える大名へ！</div>
+  </div>
+  <div class="slide-number">7 / 20</div>
+</div>
+
+<!-- スライド8: 永井直勝 -->
+<div class="slide">
+  <div class="gold-bar"></div>
+  <div class="side-accent"></div>
+  <div class="slide-header">永井直勝とはどんな人物か</div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <h3>長田家から生まれた戦国大名</h3>
+        <table>
+          <tr><th>生没年</th><td>1563〜1625年（享年63歳）</td></tr>
+          <tr><th>出自</th><td>三河大浜・長田家（平氏の末裔と伝える）</td></tr>
+          <tr><th>仕えた主君</th><td>松平信康 → 徳川家康</td></tr>
+          <tr><th>主な功績</th><td>関ヶ原で徳川方として活躍<br>三度の大名（大和・摂津・美濃）</td></tr>
+          <tr><th>肖像画</th><td>永井寺蔵・興聖寺蔵（現存）</td></tr>
+        </table>
+        <div class="note">長田家に生まれながら、自らの力で大名にまで上り詰めた！</div>
+      </div>
+      <div>
+        <div class="photo-box" style="height:340px;">
+          🎖️ 永井直勝 肖像画<br>（永井寺蔵または興聖寺蔵）<br>江戸時代前期<br><br>
+          ［肖像画写真を挿入］<br><br>
+          ※碧南市藤井達吉現代美術館<br>2025年企画展出品作品
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">8 / 20</div>
+</div>
+
+<!-- スライド9: 神官武家 -->
+<div class="slide">
+  <div class="gold-bar"></div>
+  <div class="side-accent"></div>
+  <div class="slide-header">長田家と三河の神社ネットワーク</div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <h3>「神官武家」として地域に根ざした長田家</h3>
+        <ul>
+          <li>大浜熊野大神社の「下宮神官」を世襲</li>
+          <li>上の宮・下の宮という<strong>二社体制</strong>を維持</li>
+          <li>江戸時代には白川家（朝廷系神道）の装束許状も拝受</li>
+        </ul>
+        <h3>神官武家とは？</h3>
+        <ul>
+          <li>神社を管理する神職でありながら</li>
+          <li>武士としての力も持った地方有力者</li>
+          <li>戦国時代の三河には多く存在した</li>
+        </ul>
+        <div class="highlight">神事と武力の両輪で<br>地域を支えた家！</div>
+      </div>
+      <div>
+        <div class="photo-box" style="height:180px; margin-bottom:12px;">
+          🦁 石造狛犬と社殿柱<br>（高槻・永井神社 修復工事中）<br>［写真：柱と狛犬の写真を挿入］
+        </div>
+        <div class="photo-box" style="height:160px;">
+          📋 白川家一日装束着用許状<br>文化4年（1807年）<br>朝廷系神道との関係を示す重要資料<br>［資料写真を挿入］
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">9 / 20</div>
+</div>
+
+<!-- スライド10: 大浜と海運 -->
+<div class="slide">
+  <div class="gold-bar"></div>
+  <div class="side-accent"></div>
+  <div class="slide-header">大浜と海運 ― 港町の実力 ―</div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <h3>なぜ大浜が重要だったか</h3>
+        <ul>
+          <li>三河湾に面した<strong>天然の港</strong></li>
+          <li>中世から海運・物流の要所</li>
+          <li>木材・物資の集散地として機能</li>
+          <li>尾張（名古屋）から遠江（静岡）を結ぶ海上ルート上に位置</li>
+        </ul>
+        <h3>大浜と長田家の関係</h3>
+        <ul>
+          <li>長田家は港町の中心的な家として存在</li>
+          <li>神社の神主として港を行き交う人々の<strong>精神的支柱</strong>にも</li>
+        </ul>
+        <div class="note">「大浜西浜図」（文化年間、碧南市指定文化財）に当時の景観が残る</div>
+      </div>
+      <div>
+        <div class="photo-box" style="height:320px;">
+          🌊 大浜の港町景観<br>（大浜西浜図 文化年間<br>碧南市指定文化財）<br><br>
+          ［古地図・復元図を挿入］<br><br>
+          ※碧南市民図書館蔵
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">10 / 20</div>
+</div>
+
+<div style="text-align:center; color:#d4a017; font-size:20px; padding:40px; font-family:serif;">
+  ― 前半（スライド 1〜10）終わり ― <br>
+  <span style="font-size:14px; color:#888;">後半は presentation_part2.html をご覧ください</span>
+</div>
+
+</body>
+</html>
