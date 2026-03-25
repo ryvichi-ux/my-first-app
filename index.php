@@ -524,5 +524,371 @@ function setZoom(start, end) {
 // レスポンシブ対応
 window.addEventListener('resize', () => chart.resize());
 </script>
+
+<!-- ============================================================
+     PowerPoint vs Canva 使用率グラフ（ここから貼り付け）
+     出典: 6sense Presentation Market Share / DemandSage / Backlinko
+     ============================================================ -->
+<style>
+  .pvc-section {
+    padding: 0 24px 40px;
+  }
+  .pvc-divider {
+    border: none;
+    border-top: 1px solid #30363d;
+    margin: 8px 0 32px;
+  }
+  .pvc-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .pvc-heading h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #f0f6fc;
+  }
+  .pvc-heading h2 .pvc-ppt  { color: #ff6b6b; }
+  .pvc-heading h2 .pvc-cnva { color: #a78bfa; }
+  .pvc-badge-cross {
+    background: linear-gradient(135deg, #238636, #2ea043);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.04em;
+  }
+  .pvc-sub {
+    font-size: 0.82rem;
+    color: #8b949e;
+    margin-bottom: 20px;
+  }
+  /* サマリーカード */
+  .pvc-cards {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .pvc-card {
+    flex: 1;
+    min-width: 160px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 14px 18px;
+  }
+  .pvc-card .pvc-card-label {
+    font-size: 0.75rem;
+    color: #8b949e;
+    margin-bottom: 4px;
+  }
+  .pvc-card .pvc-card-value {
+    font-size: 1.6rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .pvc-card .pvc-card-note {
+    font-size: 0.72rem;
+    color: #484f58;
+  }
+  .pvc-card.pvc-ppt-card  .pvc-card-value { color: #ff6b6b; }
+  .pvc-card.pvc-cross-card .pvc-card-value { color: #3fb950; }
+  .pvc-card.pvc-cnva-card .pvc-card-value { color: #a78bfa; }
+  /* グラフ */
+  #pvc-chart {
+    width: 100%;
+    height: 420px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    margin-bottom: 14px;
+  }
+  /* 凡例（予測マーク） */
+  .pvc-legend-note {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 0.78rem;
+    color: #8b949e;
+    margin-bottom: 14px;
+    padding: 0 4px;
+  }
+  .pvc-legend-note .pvc-ln-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pvc-ln-solid {
+    width: 28px; height: 3px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+  .pvc-ln-dashed {
+    width: 28px; height: 3px;
+    border-radius: 2px;
+    background: repeating-linear-gradient(
+      90deg,
+      currentColor 0, currentColor 5px,
+      transparent 5px, transparent 9px
+    );
+    display: inline-block;
+  }
+  /* 出典 */
+  .pvc-source {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-left: 3px solid #a78bfa;
+    border-radius: 4px;
+    padding: 12px 16px;
+    font-size: 0.78rem;
+    color: #8b949e;
+    line-height: 1.9;
+  }
+  .pvc-source strong { color: #e6edf3; }
+  .pvc-source a { color: #58a6ff; text-decoration: none; }
+  .pvc-source a:hover { text-decoration: underline; }
+  .pvc-source .pvc-warn {
+    display: inline-block;
+    background: #2d2008;
+    border: 1px solid #6e4c04;
+    color: #d29922;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.72rem;
+    margin-top: 6px;
+  }
+</style>
+
+<div class="pvc-section">
+  <hr class="pvc-divider">
+
+  <div class="pvc-heading">
+    <h2><span class="pvc-ppt">PowerPoint</span> vs <span class="pvc-cnva">Canva</span> 使用率の推移</h2>
+    <span class="pvc-badge-cross">2022年 逆転</span>
+  </div>
+  <p class="pvc-sub">プレゼンテーションソフト 市場シェア（2018〜2025年）｜出典：6sense・DemandSage・Backlinko</p>
+
+  <div class="pvc-cards">
+    <div class="pvc-card pvc-ppt-card">
+      <div class="pvc-card-label">PowerPoint（2025年実測）</div>
+      <div class="pvc-card-value">20%</div>
+      <div class="pvc-card-note">6sense調査・プレゼンソフト市場</div>
+    </div>
+    <div class="pvc-card pvc-cross-card">
+      <div class="pvc-card-label">逆転した年</div>
+      <div class="pvc-card-value">2022年</div>
+      <div class="pvc-card-note">CanvaがPowerPointを初めて追い越した</div>
+    </div>
+    <div class="pvc-card pvc-cnva-card">
+      <div class="pvc-card-label">Canva（2025年実測）</div>
+      <div class="pvc-card-value">56%</div>
+      <div class="pvc-card-note">MAU 2.6億人（2025年 公式発表）</div>
+    </div>
+  </div>
+
+  <div id="pvc-chart"></div>
+
+  <div class="pvc-legend-note">
+    <div class="pvc-ln-item">
+      <span class="pvc-ln-solid" style="background:#ff6b6b"></span>
+      PowerPoint（実績）
+    </div>
+    <div class="pvc-ln-item">
+      <span class="pvc-ln-solid" style="background:#a78bfa"></span>
+      Canva（実績）
+    </div>
+    <div class="pvc-ln-item">
+      <span class="pvc-ln-dashed" style="color:#ff6b6b"></span>
+      PowerPoint（2025実測・6sense）
+    </div>
+    <div class="pvc-ln-item">
+      <span class="pvc-ln-dashed" style="color:#a78bfa"></span>
+      Canva（2025実測・6sense）
+    </div>
+  </div>
+
+  <div class="pvc-source">
+    <strong>データ出典・参考資料</strong><br>
+    ・ <a href="https://6sense.com/tech/presentation/canva-market-share" target="_blank">6sense「Canva Presentation Market Share」</a>（2025年実測）：Canva 56.49% / PowerPoint 20.39%<br>
+    ・ <a href="https://www.demandsage.com/canva-statistics/" target="_blank">DemandSage「Canva Statistics 2026」</a>：Canva月間アクティブユーザー 推移データ<br>
+    ・ <a href="https://backlinko.com/canva-users" target="_blank">Backlinko「Canva User and Revenue Statistics 2026」</a>：2024年12月 2.2億人・2025年 2.6億人<br>
+    ・ <a href="https://www.canva.com/newsroom/news/canva-2025-wrap/" target="_blank">Canva公式「2025 in review」</a>：月間2.6億ユーザー・$35億収益（2025年実績）<br>
+    ・ <a href="https://6sense.com/tech/presentation/microsoft-powerpoint-market-share" target="_blank">6sense「Microsoft PowerPoint Presentation Market Share」</a>（2025年実測）<br>
+    <span class="pvc-warn">⚠️ 2018〜2021年のデータは報告トレンドをもとにした推計値です。2022年以降は6senseほかの報告データを使用。</span>
+  </div>
+</div>
+
+<script>
+(function() {
+  // ===== PowerPoint vs Canva データ =====
+  // 2018-2021: 各種報告のトレンドをもとにした推計値
+  // 2022-2024: 6sense / DemandSage 報告データ
+  // 2025:      6sense 実測（Canva 56.49% / PowerPoint 20.39%）
+  const pvcYears = ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'];
+
+  // 実績ライン（2018-2024）・2025はnullにして別系列で点線表示
+  const pptActual   = [68,  62,  53,  42,  33,  25,  18, null];
+  const canvaActual = [ 5,  10,  20,  33,  45,  52,  58, null];
+
+  // 2025実測値（2024→2025 の接続用に2024も含む）
+  const ppt2025   = [null, null, null, null, null, null, 18, 20];
+  const canva2025 = [null, null, null, null, null, null, 58, 56];
+
+  const pvcChart = echarts.init(document.getElementById('pvc-chart'), 'dark');
+
+  const pvcOption = {
+    backgroundColor: '#161b22',
+    animation: true,
+    animationDuration: 1000,
+    tooltip: {
+      trigger: 'axis',
+      backgroundColor: '#1c2128',
+      borderColor: '#30363d',
+      textStyle: { color: '#e6edf3', fontSize: 13 },
+      formatter: function(params) {
+        const year = params[0].axisValue;
+        let html = `<div style="font-weight:700;color:#58a6ff;margin-bottom:6px">${year}年</div>`;
+        const map = {};
+        params.forEach(p => { if (p.value !== null && p.value !== undefined) map[p.seriesName] = p.value; });
+
+        const ppt = map['PowerPoint（実績）'] ?? map['PowerPoint（2025実測）'];
+        const cnv = map['Canva（実績）']     ?? map['Canva（2025実測）'];
+
+        if (ppt != null) html += `<div style="color:#ff6b6b">📋 PowerPoint：<strong>${ppt}%</strong></div>`;
+        if (cnv != null) html += `<div style="color:#a78bfa">🎨 Canva：<strong>${cnv}%</strong></div>`;
+        if (year === '2022') html += `<div style="margin-top:6px;color:#3fb950;font-weight:700">🔀 この年に逆転！</div>`;
+        if (year === '2025') html += `<div style="margin-top:6px;color:#8b949e;font-size:11px">6sense実測値</div>`;
+        return html;
+      }
+    },
+    legend: {
+      show: false
+    },
+    grid: { left: 56, right: 24, top: 48, bottom: 56 },
+    xAxis: {
+      type: 'category',
+      data: pvcYears,
+      axisLine: { lineStyle: { color: '#30363d' } },
+      axisTick: { show: false },
+      axisLabel: {
+        color: '#8b949e',
+        fontSize: 12,
+        fontWeight: 600,
+        formatter: val => val + '年'
+      },
+      splitLine: { show: true, lineStyle: { color: '#21262d', type: 'dashed' } }
+    },
+    yAxis: {
+      type: 'value',
+      min: 0, max: 80, interval: 10,
+      axisLine: { show: false },
+      axisTick: { show: false },
+      splitLine: { lineStyle: { color: '#21262d', type: 'dashed' } },
+      axisLabel: {
+        color: '#8b949e',
+        fontSize: 11,
+        formatter: '{value}%'
+      },
+      name: '市場シェア（%）',
+      nameTextStyle: { color: '#484f58', fontSize: 11, padding: [0, 0, 0, 10] }
+    },
+    series: [
+      // PowerPoint 実績（実線）
+      {
+        name: 'PowerPoint（実績）',
+        type: 'line',
+        data: pptActual,
+        smooth: 0.3,
+        connectNulls: false,
+        symbol: 'circle', symbolSize: 9,
+        lineStyle: { color: '#ff6b6b', width: 3, shadowBlur: 6, shadowColor: 'rgba(255,107,107,0.3)' },
+        itemStyle: { color: '#ff6b6b', borderColor: '#0d1117', borderWidth: 2 },
+        label: {
+          show: true, position: 'top', color: '#ff6b6b',
+          fontSize: 12, fontWeight: 700, formatter: p => p.value !== null ? p.value + '%' : ''
+        },
+        areaStyle: {
+          color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [{ offset: 0, color: 'rgba(255,107,107,0.12)' }, { offset: 1, color: 'rgba(255,107,107,0)' }] }
+        },
+        markLine: {
+          silent: true,
+          symbol: ['none', 'arrow'],
+          lineStyle: { color: '#3fb950', width: 2, type: 'dashed' },
+          label: {
+            show: true, position: 'insideStartTop',
+            formatter: '← 2022年 逆転',
+            fontSize: 12, fontWeight: 900, color: '#3fb950',
+            backgroundColor: 'rgba(35,134,54,0.15)',
+            padding: [4, 10], borderRadius: 6
+          },
+          data: [{ xAxis: '2022' }]
+        }
+      },
+      // Canva 実績（実線）
+      {
+        name: 'Canva（実績）',
+        type: 'line',
+        data: canvaActual,
+        smooth: 0.3,
+        connectNulls: false,
+        symbol: 'circle', symbolSize: 9,
+        lineStyle: { color: '#a78bfa', width: 3, shadowBlur: 6, shadowColor: 'rgba(167,139,250,0.3)' },
+        itemStyle: { color: '#a78bfa', borderColor: '#0d1117', borderWidth: 2 },
+        label: {
+          show: true, position: 'bottom', color: '#a78bfa',
+          fontSize: 12, fontWeight: 700, formatter: p => p.value !== null ? p.value + '%' : ''
+        },
+        areaStyle: {
+          color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [{ offset: 0, color: 'rgba(167,139,250,0.12)' }, { offset: 1, color: 'rgba(167,139,250,0)' }] }
+        }
+      },
+      // PowerPoint 2025実測（点線）
+      {
+        name: 'PowerPoint（2025実測）',
+        type: 'line',
+        data: ppt2025,
+        smooth: 0.3,
+        connectNulls: false,
+        symbol: 'circle', symbolSize: 9,
+        lineStyle: { color: '#ff6b6b', width: 2.5, type: 'dashed' },
+        itemStyle: { color: '#ff6b6b', borderColor: '#0d1117', borderWidth: 2 },
+        label: {
+          show: true, position: 'top', color: '#ff6b6b',
+          fontSize: 12, fontWeight: 700, formatter: p => p.value !== null && p.dataIndex === 7 ? p.value + '%' : ''
+        }
+      },
+      // Canva 2025実測（点線）
+      {
+        name: 'Canva（2025実測）',
+        type: 'line',
+        data: canva2025,
+        smooth: 0.3,
+        connectNulls: false,
+        symbol: 'circle', symbolSize: 9,
+        lineStyle: { color: '#a78bfa', width: 2.5, type: 'dashed' },
+        itemStyle: { color: '#a78bfa', borderColor: '#0d1117', borderWidth: 2 },
+        label: {
+          show: true, position: 'bottom', color: '#a78bfa',
+          fontSize: 12, fontWeight: 700, formatter: p => p.value !== null && p.dataIndex === 7 ? p.value + '%' : ''
+        }
+      }
+    ]
+  };
+
+  pvcChart.setOption(pvcOption);
+  window.addEventListener('resize', () => pvcChart.resize());
+})();
+</script>
+<!-- ============================================================
+     PowerPoint vs Canva グラフ（ここまで）
+     ============================================================ -->
+
 </body>
 </html>
